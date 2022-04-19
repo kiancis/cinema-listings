@@ -41,3 +41,23 @@ export const updateTrailer = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const deleteTrailer = async (req, res) => {
+  try {
+    await Trailer.findByIdAndDelete(req.params.id);
+    return res.send("Trailer deleted"), res.status(204);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const getTrailer = async (req, res) => {
+  try {
+    const trailer = await Trailer.findById(req.params.id);
+    return res.send(trailer);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: error.message });
+  }
+}
